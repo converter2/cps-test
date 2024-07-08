@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Test - Measure Your Clicking Speed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .cps-test {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #click-area {
+            width: 100%;
+            height: 200px;
+            background-color: #3498db;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+        #click-area:active {
+            background-color: #2980b9;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #start-btn {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        #start-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>CPS Test - Measure Your Clicking Speed</h1>
+    
+    <div class="cps-test">
+        <button id="start-btn">Start Test</button>
+        <div id="click-area">Click here!</div>
+        <div id="result"></div>
+    </div>
+
+    <h2>What is a CPS Test?</h2>
+    <p>A CPS (Clicks Per Second) Test, also known as a clicks counter, clicking test, or clicker test, is a tool designed to measure how quickly you can click your mouse or tap your screen. This test helps you determine your clicking speed and can be used to <a href="https://startearnings.com">improve your skills</a> for various activities, including gaming and productivity tasks.</p>
+
+    <h2>How to Use the CPS Test</h2>
+    <ol>
+        <li>Click the "Start Test" button to begin.</li>
+        <li>Once the test starts, click repeatedly on the blue area as fast as you can.</li>
+        <li>The test will run for 5 seconds.</li>
+        <li>After the test ends, your CPS (Clicks Per Second) score will be displayed.</li>
+    </ol>
+
+    <h2>Why Use a CPS Test?</h2>
+    <p>Using a clicks per second counter or clic test can be beneficial for several reasons:</p>
+    <ul>
+        <li>Improve gaming performance: Many games require fast clicking, and this test can help you practice and measure your progress.</li>
+        <li>Enhance productivity: Some tasks, like data entry or spreadsheet manipulation, benefit from quick clicking skills.</li>
+        <li>Benchmark your abilities: Compare your clicking speed with friends or online communities.</li>
+        <li>Track improvements: Regular use of a CPS test can help you monitor your progress over time.</li>
+    </ul>
+
+    <h2>Tips to Improve Your CPS Score</h2>
+    <ol>
+        <li>Practice regularly: Like any skill, clicking speed improves with practice.</li>
+        <li>Use the right mouse: A gaming mouse with responsive buttons can help increase your CPS.</li>
+        <li>Try different clicking techniques: Experiment with jitter clicking, butterfly clicking, or drag clicking to find what works best for you.</li>
+        <li>Maintain good posture: Proper ergonomics can help reduce fatigue and improve performance.</li>
+        <li>Stay relaxed: Tension can slow you down, so try to keep your hand and arm relaxed while clicking.</li>
+    </ol>
+
+    <h2>Applications of Fast Clicking Skills</h2>
+    <p>While a high CPS score might seem like a novelty, fast clicking skills can be applied in various areas:</p>
+    <ul>
+        <li>Gaming: Many games, especially in the MOBA and FPS genres, require rapid clicking for actions like attacking or selecting units.</li>
+        <li>Productivity software: Spreadsheet applications and data entry tasks can benefit from quick clicking abilities.</li>
+        <li>Graphic design: Some design tasks involve repetitive clicking actions, where speed can increase efficiency.</li>
+        <li>Competitive clicking games: There are online games and competitions specifically focused on clicking speed.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <h3>What is a good CPS score?</h3>
+    <p>A good CPS score can vary depending on the individual and the context. Generally, scores can be categorized as follows:</p>
+    <ul>
+        <li>3-5 CPS: Average</li>
+        <li>6-8 CPS: Good</li>
+        <li>9-12 CPS: Very good</li>
+        <li>13+ CPS: Excellent</li>
+    </ul>
+
+    <h3>Can I improve my CPS over time?</h3>
+    <p>Yes, like any skill, your clicking speed can improve with practice. Regular use of this CPS test tool can help you track your progress and identify areas for improvement.</p>
+
+    <h3>Is a high CPS score useful in real-life scenarios?</h3>
+    <p>While extremely high CPS scores may not have direct real-world applications, the skills developed through practicing can be beneficial in various computing tasks, gaming, and activities requiring quick reflexes and hand-eye coordination.</p>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const clickArea = document.getElementById('click-area');
+        const result = document.getElementById('result');
+
+        let clicks = 0;
+        let testActive = false;
+        let startTime;
+
+        startBtn.addEventListener('click', startTest);
+        clickArea.addEventListener('click', handleClick);
+
+        function startTest() {
+            clicks = 0;
+            testActive = true;
+            startTime = Date.now();
+            clickArea.textContent = 'Click!';
+            result.textContent = '';
+            startBtn.disabled = true;
+
+            setTimeout(() => {
+                testActive = false;
+                const elapsedTime = (Date.now() - startTime) / 1000;
+                const cps = (clicks / elapsedTime).toFixed(2);
+                result.textContent = `Your CPS: ${cps}`;
+                clickArea.textContent = 'Test completed!';
+                startBtn.disabled = false;
+            }, 5000);
+        }
+
+        function handleClick() {
+            if (testActive) {
+                clicks++;
+                clickArea.textContent = `Clicks: ${clicks}`;
+            }
+        }
+    </script>
+</body>
+</html>
